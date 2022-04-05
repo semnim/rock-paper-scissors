@@ -37,14 +37,14 @@ function displayResult(result, playerSelection, computerSelection) {
   let message;
   if (result == "lose") {
     hideLife("player");
-    message = `You lose the round! ${capitalize(
+    message = `You lose the round!\r\n ${capitalize(
       computerSelection
-    )} beats ${capitalize(playerSelection)}!`;
+    )} beats ${capitalize(playerSelection)}.`;
   } else if (result == "win") {
     hideLife("computer");
-    message = `You win the round! ${capitalize(
+    message = `You win the round!\r\n ${capitalize(
       playerSelection
-    )} beats ${capitalize(computerSelection)}!`;
+    )} beats ${capitalize(computerSelection)}.`;
   } else {
     message = "It's a tie!";
   }
@@ -118,27 +118,29 @@ function appendStartScreen() {
   startButton.addEventListener("click", () => window.location.reload());
 }
 
-//eventlisteners for button and coin animations
+/* eventlisteners for animations */
 const coin = document.querySelector(".coin");
 const startButton = document.querySelector(".action--button.disappear");
+const container = document.querySelector(".arena");
+const element = document.createElement("p");
+
+// fly-down effect
 startButton.addEventListener("click", () => {
-  startButton.classList.add("pressed");
   setTimeout(() => {
     startButton.style.top = "75vh";
     startButton.style.outline = "none";
     coin.style.top = "75vh";
     coin.style.outline = "none";
     isStarted = true;
-  }, 500);
+  }, 100);
 });
 
+// remove components that flew out of the screen
 startButton.addEventListener("transitionend", (e) => {
   if (e.propertyName == "top") {
     startButton.remove();
     coin.remove();
-    let container = document.querySelector(".arena");
     container.style.justifyContent = "flex-start";
-    let element = document.createElement("p");
     element.textContent = "Make your pick!";
     container.appendChild(element);
   }
