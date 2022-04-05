@@ -137,6 +137,7 @@ startButton.addEventListener("transitionend", (e) => {
     startButton.remove();
     coin.remove();
     let container = document.querySelector(".arena");
+    container.style.justifyContent = "flex-start";
     let element = document.createElement("p");
     element.textContent = "Make your pick!";
     container.appendChild(element);
