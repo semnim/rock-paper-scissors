@@ -18,7 +18,10 @@
       <span class="red--text">Scissors</span>
     </h1>
     <div id="score--board">0 - 0</div>
-    <div id="life--bar__wrapper"></div>
+    <div id="player--overview">
+      <p>Player<br>One</p>
+      <p>Computer</p>
+    </div>
     <div id="battlefield">
       <div class="player--panel__wrapper">
         <div id="life--bar">
@@ -56,13 +59,22 @@
       <div class="player--panel__wrapper">
         <div class="player--panel" id="computer">
           <button src="#" class="invisible">
-            <img src="./images/rock.png" class="choice--button" />
+            <img
+              src="./images/rock.png"
+              class="choice--button action--button"
+            />
           </button>
           <button src="#" class="invisible">
-            <img src="./images/paper.png" class="choice--button" />
+            <img
+              src="./images/paper.png"
+              class="choice--button action--button"
+            />
           </button>
           <button src="#" class="invisible">
-            <img src="./images/scissors.png" class="choice--button" />
+            <img
+              src="./images/scissors.png"
+              class="choice--button action--button"
+            />
           </button>
         </div>
         <div id="life--bar">
@@ -78,7 +90,7 @@
       <p>
         Copyright ©
         <script>
-          document.write(new Date().getFullYear())
+          document.write(new Date().getFullYear());
         </script>
         SEMNIM
       </p>
