@@ -4,9 +4,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissors</title>
+    <title>Rock, Paper, Scissors</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
 </head>
 <body>
+    <h1><span class="blue--text">Rock</span> <span class="white--text">Paper</span> <span class="red--text">Scissors</span></h1>
+    <div id="score--board">0 - 0</div>
+    <div id="life--bar__wrapper">
+        
+    </div>
+    <div id="battlefield">
+        <div class="player--panel__wrapper">
+            <div id="life--bar">
+                <img src="./images/bheart.png" class="blue">
+                <img src="./images/bheart.png" class="blue">
+                <img src="./images/bheart.png" class="blue">
+                <img src="./images/bheart.png" class="blue">
+                <img src="./images/bheart.png" class="blue">
+            </div>
+            <div class="player--panel" id="human">
+                <button src="#" class="invisible" id="rock"><img src="./images/rock.png" class="choice--button action--button"></button>
+                <button src="#" class="invisible" id="paper"><img src="./images/paper.png" class="choice--button action--button"></button>
+                <button src="#" class="invisible" id="scissors"><img src="./images/scissors.png" class="choice--button action--button"></button>
+            </div>
+        </div>
+        <div class="arena">
+            <img src="./images/goldcoin.png" class="coin disappear">
+            <button class="action--button disappear">Start</button>
+        </div>
+        <div class="player--panel__wrapper">
+            <div class="player--panel" id="computer">
+                <button src="#" class="invisible"><img src="./images/rock.png" class="choice--button"></button>
+                <button src="#" class="invisible"><img src="./images/paper.png" class="choice--button"></button>
+                <button src="#" class="invisible"><img src="./images/scissors.png" class="choice--button"></button>
+            </div>
+            <div id="life--bar">
+                <img src="./images/heart.png" class="red">
+                <img src="./images/heart.png" class="red">
+                <img src="./images/heart.png" class="red">
+                <img src="./images/heart.png" class="red">
+                <img src="./images/heart.png" class="red">
+            </div>
+        </div>
+    </div>
     <script src="./javascript.js"></script>
 </body>
 </html>
+
+<!-- sword, wand, bow - wand beats sword, sword beats bow, bow beats wand ?-->
