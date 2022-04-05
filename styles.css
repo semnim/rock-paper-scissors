@@ -21,7 +21,10 @@
 }
 body {
   text-align: center;
-  background-color: var(--black);
+  /*background-color: var(--black);*/
+  /*background: linear-gradient(#0C0828, #362182);*/
+  background: url('./images/bg.gif');
+  background-size: cover;
   color: whitesmoke;
 }
 

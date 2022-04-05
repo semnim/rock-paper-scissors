@@ -17,6 +17,7 @@ function computerPlay() {
   return choices[Math.floor(Math.random() * choices.length)];
 }
 
+
 function playRound(playerSelection, computerSelection) {
   if (playerSelection == computerSelection) {
     displayResult("tie", playerSelection, computerSelection);
@@ -82,6 +83,12 @@ function animateFlickering(color) {
   setTimeout(() => {
     heart.src = "./images/empty-heart.png";
   }, 1500);
+  setTimeout(() => {
+    heart.src = `./images/${color}-half.png`;
+  }, 2000);
+  setTimeout(() => {
+    heart.src = "./images/empty-heart.png";
+  }, 2500);
   heart.classList.add("empty");
 }
 function capitalize(str) {
