@@ -24,7 +24,6 @@ body {
   background: url("./images/bg.gif");
   background-size: cover;
   color: whitesmoke;
-  margin-bottom: 100px;
 }
 h1 {
   font-size: 40px;
@@ -198,6 +197,7 @@ img {
   justify-content: center;
   gap: 10px;
   width: 100%;
+  padding: 10px;
   color: var(--primary-light);
   font-size: 20px;
 }
