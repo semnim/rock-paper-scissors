@@ -1,15 +1,60 @@
+/* eventlisteners for start-screen animations */
+const coin = document.querySelector(".coin");
+const startButton = document.querySelector(".action--button.intro--item");
+const container = document.querySelector(".interactive--display");
+const element = document.createElement("p");
+
+// fly-down effect
+startButton.addEventListener("click", () => {
+  setTimeout(() => {
+    startButton.style.top = "75vh";
+    startButton.style.outline = "none";
+    coin.style.top = "75vh";
+    coin.style.outline = "none";
+    gameIsStarted = true;
+  }, 100);
+});
+
+// remove components that flew out of the screen
+startButton.addEventListener("transitionend", (e) => {
+  if (e.propertyName == "top") {
+    startButton.remove();
+    coin.remove();
+    container.style.justifyContent = "flex-start";
+    element.textContent = "Make your pick!";
+    element.classList.add("interactive--message");
+    container.appendChild(element);
+  }
+});
+/* -------------------------------------------------------------------------------- */
+
 const choices = ["rock", "paper", "scissors"];
 let playerWins = 0;
 let computerWins = 0;
-let isStarted = false;
+let gameIsStarted = false;
+
+function computerPlay() {
+  return choices[Math.floor(Math.random() * choices.length)];
+}
+
+/* EventListener for computer click */
+const computerButtons = document.querySelectorAll("#computer>button");
+computerButtons.forEach((cbutton) => {
+  cbutton.addEventListener("click", () => {
+    let buttonImage = cbutton.firstChild.nextSibling;
+    buttonImage.classList.add("on--click");
+    setTimeout(() => {
+      buttonImage.classList.remove("on--click");
+    }, 300);
+  });
+});
 
 // EventListener for playerSelection
-const buttons = document.querySelectorAll("#human>button");
-buttons.forEach((button) => {
+const playerButtons = document.querySelectorAll("#human>button");
+playerButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    if (isStarted) {
+    if (gameIsStarted) {
       let computerMove = computerPlay();
-      let computerButtons = document.querySelectorAll("#computer>button");
       computerButtons.forEach((cbutton) => {
         if (computerMove === cbutton.id) {
           cbutton.click();
@@ -19,10 +64,6 @@ buttons.forEach((button) => {
     }
   });
 });
-
-function computerPlay() {
-  return choices[Math.floor(Math.random() * choices.length)];
-}
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection == computerSelection) {
@@ -42,22 +83,25 @@ function playRound(playerSelection, computerSelection) {
 
 function displayResult(result, playerSelection, computerSelection) {
   let message;
-  if (result == "lose") {
-    animateFlickering("player");
-    message = `You lose the round!\r\n ${capitalize(
-      computerSelection
-    )} beats ${capitalize(playerSelection)}.`;
-  } else if (result == "win") {
-    animateFlickering("computer");
-    message = `You win the round!\r\n ${capitalize(
-      playerSelection
-    )} beats ${capitalize(computerSelection)}.`;
-  } else {
-    message = "It's a tie!";
+  switch (result) {
+    case "lose":
+      animateFlickering("player");
+      message = `You lose the round!\n ${capitalize(
+        computerSelection
+      )} beats ${capitalize(playerSelection)}.`;
+      break;
+    case "win":
+      animateFlickering("computer");
+      message = `You win the round!\n ${capitalize(
+        playerSelection
+      )} beats ${capitalize(computerSelection)}.`;
+      break;
+    default:
+      message = "It's a tie!";
   }
   updateScore();
   if (isGameOver()) {
-    isStarted = false;
+    gameIsStarted = false;
     message = message.includes("win")
       ? "You won the game!"
       : "You lost the game!";
@@ -72,21 +116,24 @@ function displayResult(result, playerSelection, computerSelection) {
 // Helper functions for displayResult
 function animateFlickering(actor) {
   let heart = document.querySelector(`.heart--wrapper > .${actor}:not(.empty)`);
-  heart.src = "./images/heart-half.png";
+  let emptyHeartImagePath = "./images/heart-empty.png";
+  let halfHeartImagePath = "./images/heart-half.png";
+
+  heart.src = halfHeartImagePath;
   setTimeout(() => {
-    heart.src = "./images/heart-empty.png";
+    heart.src = emptyHeartImagePath;
   }, 500);
   setTimeout(() => {
-    heart.src = "./images/heart-half.png";
+    heart.src = halfHeartImagePath;
   }, 1000);
   setTimeout(() => {
-    heart.src = "./images/heart-empty.png";
+    heart.src = emptyHeartImagePath;
   }, 1500);
   setTimeout(() => {
-    heart.src = "./images/heart-half.png";
+    heart.src = halfHeartImagePath;
   }, 2000);
   setTimeout(() => {
-    heart.src = "./images/heart-empty.png";
+    heart.src = emptyHeartImagePath;
   }, 2500);
   heart.classList.add("empty");
 }
@@ -102,7 +149,19 @@ function updateMessage(message) {
   let nodes = Array.from(container.childNodes);
   nodes.forEach((node) => node.remove());
   let paragraph = document.createElement("p");
-  paragraph.textContent = message;
+  if (message.includes("lost") || message.includes("won")) {
+    let resultMessageSpan = document.createElement("span");
+    resultMessageSpan.classList.add("textcolor");
+    resultMessageSpan.textContent = message.split(/\n/)[0];
+    
+    let playAgainPrompt = document.createElement("p");
+    playAgainPrompt.textContent = message.split(/\n/)[1];
+
+    paragraph.appendChild(resultMessageSpan);
+    paragraph.appendChild(playAgainPrompt);
+  } else {
+    paragraph.textContent = message;
+  }
   paragraph.classList.add("interactive--message");
   container.appendChild(paragraph);
 }
@@ -119,45 +178,3 @@ function appendStartScreen() {
   container.appendChild(restartButton);
   restartButton.addEventListener("click", () => window.location.reload());
 }
-
-/* eventlisteners for animations */
-const coin = document.querySelector(".coin");
-const startButton = document.querySelector(".action--button.intro--item");
-const container = document.querySelector(".interactive--display");
-const element = document.createElement("p");
-
-// fly-down effect
-startButton.addEventListener("click", () => {
-  setTimeout(() => {
-    startButton.style.top = "75vh";
-    startButton.style.outline = "none";
-    coin.style.top = "75vh";
-    coin.style.outline = "none";
-    isStarted = true;
-  }, 100);
-});
-
-// remove components that flew out of the screen
-startButton.addEventListener("transitionend", (e) => {
-  if (e.propertyName == "top") {
-    startButton.remove();
-    coin.remove();
-    container.style.justifyContent = "flex-start";
-    element.textContent = "Make your pick!";
-    element.classList.add("interactive--message");
-    container.appendChild(element);
-  }
-});
-
-let actionButtons = document.querySelectorAll("#computer>button");
-actionButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    let image = button.firstChild.nextSibling;
-    image.classList.add("on--click");
-
-    setTimeout(() => {
-      image.classList.remove("on--click");
-    }, 300);
-  });
-});
-
