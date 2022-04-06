@@ -20,7 +20,6 @@ startButton.addEventListener("transitionend", (e) => {
   if (e.propertyName == "top") {
     startButton.remove();
     coin.remove();
-    container.style.justifyContent = "flex-start";
     element.textContent = "Make your pick!";
     element.classList.add("interactive--message");
     container.appendChild(element);
@@ -86,7 +85,7 @@ function displayResult(result, playerSelection, computerSelection) {
   switch (result) {
     case "lose":
       animateFlickering("player");
-      message = `You lose the round!\n ${capitalize(
+      message = `You lose the round!\r\n\n ${capitalize(
         computerSelection
       )} beats ${capitalize(playerSelection)}.`;
       break;
@@ -153,7 +152,7 @@ function updateMessage(message) {
     let resultMessageSpan = document.createElement("span");
     resultMessageSpan.classList.add("textcolor");
     resultMessageSpan.textContent = message.split(/\n/)[0];
-    
+
     let playAgainPrompt = document.createElement("p");
     playAgainPrompt.textContent = message.split(/\n/)[1];
 
@@ -172,8 +171,6 @@ function appendStartScreen() {
   let container = document.querySelector(".interactive--display");
   let restartButton = document.createElement("button");
   restartButton.classList.add("action--button");
-  restartButton.style.marginTop = "20px";
-  restartButton.style.padding = "10px";
   restartButton.textContent = "Restart";
   container.appendChild(restartButton);
   restartButton.addEventListener("click", () => window.location.reload());
