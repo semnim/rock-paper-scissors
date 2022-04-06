@@ -85,7 +85,7 @@ function displayResult(result, playerSelection, computerSelection) {
   switch (result) {
     case "lose":
       animateFlickering("player");
-      message = `You lose the round!\r\n\n ${capitalize(
+      message = `You lose the round!\n ${capitalize(
         computerSelection
       )} beats ${capitalize(playerSelection)}.`;
       break;
