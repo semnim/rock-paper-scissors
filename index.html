@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rock, Paper, Scissors</title>
+    <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="./styles.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap"
@@ -12,78 +12,86 @@
     />
   </head>
   <body>
-    <h1 class="textcolor">
-      ROCK PAPER SCISSORS
-    </h1>
-    <div id="score--board" class="textcolor">0 - 0</div>
-    <div id="battlefield">
-      <div class="player--panel__wrapper">
-        <div id="life--bar">
-          <img src="./images/bheart.png" class="blue" />
-          <img src="./images/bheart.png" class="blue" />
-          <img src="./images/bheart.png" class="blue" />
-          <img src="./images/bheart.png" class="blue" />
-          <img src="./images/bheart.png" class="blue" />
+    <header>
+      <h1 class="textcolor">ROCK PAPER SCISSORS</h1>
+    </header>
+    <main>
+      <div id="score--board" class="textcolor">0 - 0</div>
+      <div class="midscreen--wrapper">
+        <!-- Player One -->
+        <div class="player--panel__wrapper--container">
+          <div class="player--panel__wrapper">
+            <div class="heart--wrapper">
+              <img src="./images/blue-heart.png" class="blue" />
+              <img src="./images/blue-heart.png" class="blue" />
+              <img src="./images/blue-heart.png" class="blue" />
+              <img src="./images/blue-heart.png" class="blue" />
+              <img src="./images/blue-heart.png" class="blue" />
+            </div>
+            <!-- id's [human, computer, rock, paper, scissors] necessary for JS code. -->
+            <div class="player--button__panel" id="human">
+              <button src="#" class="invisible--button" id="rock">
+                <img
+                  src="./images/rock.png"
+                  class="choice--button action--button"
+                />
+              </button>
+              <button src="#" class="invisible--button" id="paper">
+                <img
+                  src="./images/paper.png"
+                  class="choice--button action--button"
+                />
+              </button>
+              <button src="#" class="invisible--button" id="scissors">
+                <img
+                  src="./images/scissors.png"
+                  class="choice--button action--button"
+                />
+              </button>
+            </div>
+          </div>
+          <p class="player--description">Player<br />One</p>
         </div>
-        <div class="player--panel" id="human">
-          <button src="#" class="invisible" id="rock">
-            <img
-              src="./images/rock.png"
-              class="choice--button action--button"
-            />
-          </button>
-          <button src="#" class="invisible" id="paper">
-            <img
-              src="./images/paper.png"
-              class="choice--button action--button"
-            />
-          </button>
-          <button src="#" class="invisible" id="scissors">
-            <img
-              src="./images/scissors.png"
-              class="choice--button action--button"
-            />
-          </button>
+        <div class="interactive--display">
+          <img src="./images/goldcoin.png" class="coin intro--item" />
+          <button class="action--button intro--item">Start</button>
+        </div>
+        <!-- Computer -->
+        <div class="player--panel__wrapper--container">
+          <div class="player--panel__wrapper">
+            <!-- id's [human, computer, rock, paper, scissors] necessary for JS code. -->
+            <div class="player--button__panel" id="computer">
+              <button src="#" class="invisible--button" id="rock">
+                <img
+                  src="./images/rock.png"
+                  class="choice--button idle"
+                />
+              </button>
+              <button src="#" class="invisible--button" id="paper">
+                <img
+                  src="./images/paper.png"
+                  class="choice--button idle"
+                />
+              </button>
+              <button src="#" class="invisible--button" id="scissors">
+                <img
+                  src="./images/scissors.png"
+                  class="choice--button idle"
+                />
+              </button>
+            </div>
+            <div class="heart--wrapper">
+              <img src="./images/red-heart.png" class="red" />
+              <img src="./images/red-heart.png" class="red" />
+              <img src="./images/red-heart.png" class="red" />
+              <img src="./images/red-heart.png" class="red" />
+              <img src="./images/red-heart.png" class="red" />
+            </div>
+          </div>
+          <p class="player--description">Computer</p>
         </div>
       </div>
-      <div class="arena">
-        <img src="./images/goldcoin.png" class="coin disappear" />
-        <button class="action--button disappear">Start</button>
-      </div>
-      <div class="player--panel__wrapper">
-        <div class="player--panel" id="computer">
-          <button src="#" class="invisible">
-            <img
-              src="./images/rock.png"
-              class="choice--button action--button"
-            />
-          </button>
-          <button src="#" class="invisible">
-            <img
-              src="./images/paper.png"
-              class="choice--button action--button"
-            />
-          </button>
-          <button src="#" class="invisible">
-            <img
-              src="./images/scissors.png"
-              class="choice--button action--button"
-            />
-          </button>
-        </div>
-        <div id="life--bar">
-          <img src="./images/heart.png" class="red" />
-          <img src="./images/heart.png" class="red" />
-          <img src="./images/heart.png" class="red" />
-          <img src="./images/heart.png" class="red" />
-          <img src="./images/heart.png" class="red" />
-        </div>
-      </div>
-    </div>
-    <div id="player--overview">
-      <p>Player<br>One</p>
-      <p>Computer</p>
-    </div>
+    </main>
     <footer class="footer textcolor">
       <p>
         Copyright ©

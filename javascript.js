@@ -8,7 +8,14 @@ const buttons = document.querySelectorAll("#human>button");
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     if (isStarted) {
-      playRound(button.id, computerPlay());
+      let computerMove = computerPlay();
+      let computerButtons = document.querySelectorAll("#computer>button");
+      computerButtons.forEach((cbutton) => {
+        if (computerMove === cbutton.id) {
+          cbutton.click();
+        }
+      });
+      playRound(button.id, computerMove);
     }
   });
 });
@@ -71,7 +78,7 @@ function hideLife(actor) {
   }
 }
 function animateFlickering(color) {
-  let heart = document.querySelector(`#life--bar > .${color}:not(.empty)`);
+  let heart = document.querySelector(`.heart--wrapper > .${color}:not(.empty)`);
   heart.src = `./images/${color}-half.png`;
   setTimeout(() => {
     heart.src = "./images/empty-heart.png";
@@ -98,30 +105,32 @@ function updateScore() {
   scoreBoard.textContent = `${playerWins} - ${computerWins}`;
 }
 function updateMessage(message) {
-  let container = document.querySelector(".arena");
+  let container = document.querySelector(".interactive--display");
   let nodes = Array.from(container.childNodes);
   nodes.forEach((node) => node.remove());
   let paragraph = document.createElement("p");
   paragraph.textContent = message;
+  paragraph.classList.add("interactive--message");
   container.appendChild(paragraph);
 }
 function isGameOver() {
   return computerWins == 5 || playerWins == 5;
 }
 function appendStartScreen() {
-  let container = document.querySelector(".arena");
-  let startButton = document.createElement("button");
-  startButton.classList.add("action--button");
-  startButton.style.marginTop = "20px";
-  startButton.textContent = "Restart";
-  container.appendChild(startButton);
-  startButton.addEventListener("click", () => window.location.reload());
+  let container = document.querySelector(".interactive--display");
+  let restartButton = document.createElement("button");
+  restartButton.classList.add("action--button");
+  restartButton.style.marginTop = "20px";
+  restartButton.style.padding = "10px";
+  restartButton.textContent = "Restart";
+  container.appendChild(restartButton);
+  restartButton.addEventListener("click", () => window.location.reload());
 }
 
 /* eventlisteners for animations */
 const coin = document.querySelector(".coin");
-const startButton = document.querySelector(".action--button.disappear");
-const container = document.querySelector(".arena");
+const startButton = document.querySelector(".action--button.intro--item");
+const container = document.querySelector(".interactive--display");
 const element = document.createElement("p");
 
 // fly-down effect
@@ -142,6 +151,19 @@ startButton.addEventListener("transitionend", (e) => {
     coin.remove();
     container.style.justifyContent = "flex-start";
     element.textContent = "Make your pick!";
+    element.classList.add("interactive--message");
     container.appendChild(element);
   }
+});
+
+let actionButtons = document.querySelectorAll("#computer>button");
+actionButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    let image = button.firstChild.nextSibling;
+    image.classList.add("on--click");
+
+    setTimeout(() => {
+      image.classList.remove("on--click");
+    }, 300);
+  });
 });
