@@ -43,12 +43,12 @@ function playRound(playerSelection, computerSelection) {
 function displayResult(result, playerSelection, computerSelection) {
   let message;
   if (result == "lose") {
-    hideLife("player");
+    animateFlickering("player");
     message = `You lose the round!\r\n ${capitalize(
       computerSelection
     )} beats ${capitalize(playerSelection)}.`;
   } else if (result == "win") {
-    hideLife("computer");
+    animateFlickering("computer");
     message = `You win the round!\r\n ${capitalize(
       playerSelection
     )} beats ${capitalize(computerSelection)}.`;
@@ -70,30 +70,23 @@ function displayResult(result, playerSelection, computerSelection) {
 }
 
 // Helper functions for displayResult
-function hideLife(actor) {
-  if (actor === "player") {
-    animateFlickering("blue");
-  } else if (actor === "computer") {
-    animateFlickering("red");
-  }
-}
-function animateFlickering(color) {
-  let heart = document.querySelector(`.heart--wrapper > .${color}:not(.empty)`);
-  heart.src = `./images/${color}-half.png`;
+function animateFlickering(actor) {
+  let heart = document.querySelector(`.heart--wrapper > .${actor}:not(.empty)`);
+  heart.src = "./images/heart-half.png";
   setTimeout(() => {
-    heart.src = "./images/empty-heart.png";
+    heart.src = "./images/heart-empty.png";
   }, 500);
   setTimeout(() => {
-    heart.src = `./images/${color}-half.png`;
+    heart.src = "./images/heart-half.png";
   }, 1000);
   setTimeout(() => {
-    heart.src = "./images/empty-heart.png";
+    heart.src = "./images/heart-empty.png";
   }, 1500);
   setTimeout(() => {
-    heart.src = `./images/${color}-half.png`;
+    heart.src = "./images/heart-half.png";
   }, 2000);
   setTimeout(() => {
-    heart.src = "./images/empty-heart.png";
+    heart.src = "./images/heart-empty.png";
   }, 2500);
   heart.classList.add("empty");
 }
@@ -167,3 +160,4 @@ actionButtons.forEach((button) => {
     }, 300);
   });
 });
+
